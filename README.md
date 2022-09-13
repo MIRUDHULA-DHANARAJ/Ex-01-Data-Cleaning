@@ -25,37 +25,60 @@ Register number : 212221230060
 
 import pandas as pd
 
-df = pd.read_csv('Data_set.csv')
+import numpy as np
 
-df.head(10)
+import seaborn as sns
 
-df.info()
+data=pd.read_csv("Data_set.csv")
 
-df.tail()
+data
 
-df.isnull().sum()
+data.head()
 
-df['show_name']=df['show_name'].fillna(df['show_name'].mode()[0])
+data.describe()
 
-df['aired_on']=df['aired_on'].fillna(df['aired_on'].mode()[0])
+data.info()
 
-df['original_network']=df['original_network'].fillna(df['original_network'].mode()[0])
+data.tail()
 
-df.head()
+data.shape
 
-df['rating']=df['rating'].fillna(df['rating'].mean())
+data.columns
 
-df['current_overall_rank']=df['current_overall_rank'].fillna(df['current_overall_rank'].mean())
+data.isnull().sum()
 
-df.head()
+data.duplicated()
 
-df['watchers']=df['watchers'].fillna(df['watchers'].median())
+#Using mode method to fill the data in columns as Object(String)
 
-df.head()
+#mode()[0] - Takes the most reccuring value and fills the empty cells
 
-df.info()
+data['show_name'] = data['show_name'].fillna(data['show_name'].mode()[0])
 
-df.isnull().sum()
+data['aired_on'] = data['aired_on'].fillna(data['aired_on'].mode()[0])
+
+data['original_network'] = data['original_network'].fillna(data['original_network'].mode()[0])
+
+
+sns.boxplot(x="rating",data=data)
+
+#Using mean method to fill the data
+
+data['rating'] = data['rating'].fillna(data['rating'].mean())
+
+data['current_overall_rank'] = data['current_overall_rank'].fillna(data['current_overall_rank'].mean())
+
+data['watchers'] = data['watchers'].fillna(data['watchers'].mean())
+
+#Checking the total no.of null values again
+
+data.isnull().sum()
+
+#Checking info of the dataset to check all the columns have entries
+
+data.info()
+
+
 
 
 
